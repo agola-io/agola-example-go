@@ -36,7 +36,6 @@ local task_build_go(version, arch) = {
             arch: 'amd64',
             containers: [
               { image: 'debian:stretch' },
-              { image: 'postgres' },
             ],
           },
           steps: [
