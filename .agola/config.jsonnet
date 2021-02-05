@@ -9,7 +9,11 @@ local go_runtime(version, arch) = {
 local task_build_go(version, arch) = {
   name: 'build go ' + version + ' ' + arch,
   runtime: go_runtime(version, arch),
+  environment: {
+    PIPPO: { from_variable: 'pippo' }
+  },
   steps: [
+    { type: 'run', name: 'env', command: 'env' },
     { type: 'clone' },
     { type: 'restore_cache', keys: ['cache-sum-{{ md5sum "go.sum" }}', 'cache-date-'], dest_dir: '/go/pkg/mod/cache' },
     { type: 'run', name: 'build the program', command: 'go build .' },
