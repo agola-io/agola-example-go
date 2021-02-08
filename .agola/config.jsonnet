@@ -10,8 +10,8 @@ local task_build_go(version, arch) = {
   name: 'build go ' + version + ' ' + arch,
   runtime: go_runtime(version, arch),
   environment: {
-    PIPPO: { from_variable: 'pippo' }
-    PLUTO: { from_variable: 'pippo' }
+    PIPPO: { from_variable: 'pippo' },
+    PLUTO: { from_variable: 'pippo' },
   },
   steps: [
     { type: 'run', name: 'env', command: 'env' },
@@ -32,7 +32,7 @@ local task_build_go(version, arch) = {
       tasks: [
         task_build_go(version, arch)
         for version in ['1.11', '1.12']
-        # uncomment additional archs if there's an available executor
+        // uncomment additional archs if there's an available executor
         for arch in ['amd64' /*'arm64'*/]
       ] + [
         {
