@@ -10,7 +10,7 @@ local task_build_go(version, arch) = {
   name: 'build go ' + version + ' ' + arch,
   runtime: go_runtime(version, arch),
   environment: {
-    PIPPO: { from_variable: 'pippo' }
+    PIPPO: { from_variable: 'variables' }
   },
   steps: [
     { type: 'run', name: 'env', command: 'env' },
