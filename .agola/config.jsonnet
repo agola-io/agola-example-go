@@ -14,8 +14,7 @@ local task_build_go(version, arch) = {
     PLUTO: { from_variable: 'pippo' },
   },
   steps: [
-    { type: 'run', name: 'env', command: 'env' },
-    { type: 'run', name: 'env', command: 'if [ $PIPPO ] ; then echo "PIPPO FOUND: " $PIPPO ; else echo "PIPPO NOT FOUND"; return 1 ; fi' },
+    { type: 'run', name: 'env', command: 'env | grep -i ref' },
     { type: 'clone' },
     { type: 'restore_cache', keys: ['cache-sum-{{ md5sum "go.sum" }}', 'cache-date-'], dest_dir: '/go/pkg/mod/cache' },
     { type: 'run', name: 'build the program', command: 'go build .' },
